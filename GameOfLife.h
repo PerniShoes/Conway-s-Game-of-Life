@@ -5,6 +5,7 @@
 #include "utils.h"
 
 class Time;
+class Texture;
 
 class GameOfLife
 {
@@ -21,11 +22,21 @@ public:
     void Draw() const;
     void DrawCells() const;
     void DrawGrid() const;
+
+    void DrawUI(Rectf viewport) const;
+
     void Update(float elapsedTime);
+    void UpdateTextures();
 
     void Start();
     void Pause();
     void Restart();
+
+    Point2f GetCenterOfGrid() const;
+    void ZoomIn(Point2f mousePos);
+    void ZoomOut(Point2f mousePos);
+    void ResetZoom();
+    float GetScale() const;
 
     void OnMouseUp(const SDL_MouseButtonEvent& e);
     void OnMouseDown(const SDL_MouseButtonEvent& e);  // Check for holding to allow "drawing" over the field
@@ -33,19 +44,39 @@ public:
 
 
 private:
+    std::unique_ptr<Texture> m_PopulationTxt;
+    std::unique_ptr<Texture> m_GenerationTxt;
+    Uint64 m_Population;
+    Uint64 m_Generation;
 
+    Point2f m_LastMousePos;
+    Point2f m_ZoomTarget;
     std::unique_ptr<Time> m_Time;
     bool m_Paused;
+
 
     const int m_CellsPerRow;
     const float m_CellSize;
     Point2f m_StartingPoint;
     float m_LineWidth;
 
+    float m_ScaleFactor;
+    float m_DrawOffset{};
 
-    // Need to store Rectf's of cells probably, to check for mouse overlap
+  
     // A lot of code copied (like into OnMouseDown and DrawCells)
 
+    // There are bad design desicions regarding drawing and translating of the grid. 
+    // It should be drawn from 0.0f 0.0f and then translated to origin to scale and then translated back
+    // Rn it is drawn from "-half grid size" so the center is on 0.0f 0.0f. Will make it work, but should be changed 
+
+
+    // HOW TO FIX ZOOM: // Failed
+    // Zoom detection not working comes last, once I have proper place zooming (It will depend on the solution)
+    // Detection simply doesn't take into account the scale 550 scaled is 550 unscaled for detection (ss in dc)
+    // FIRST: When zoom in then "U" (reset scale) it takes my mouse to a different place, that is the problem
+    // Discord priv has ss of issue when zooming out
+    // Zoom is based on screen (if you zoom in right up corner it zooms into right up corner of grid) (when not camera moved)
 
     struct Cell
     {
@@ -54,9 +85,6 @@ private:
     };
 
     std::vector<Cell> m_Cells;
-
-    // Prolly need flags like: Survives, dies/readyToDelete, spawns
-    // Also obviously: Dead/Alive
      
     // RULES:
     // Any live cell with fewer than two live neighbours dies,as if caused by underpopulation.
@@ -77,11 +105,12 @@ private:
 
 
     // TODO:
-    // Zooming in and out
-    // Panning the camera
+    // CLEAN UP CODE
+    // Try bigger grid, maybe improve performance
+    // 
     //
-    // Generation counter   // Storing bigger numbers, with Uint64 prolly
-    // Population counter   //  
+    // 
+    // 
 
 
 };

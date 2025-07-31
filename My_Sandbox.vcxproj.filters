@@ -33,6 +33,9 @@
     <ClCompile Include="Time.cpp">
       <Filter>Universal files</Filter>
     </ClCompile>
+    <ClCompile Include="OrientationManager.cpp">
+      <Filter>Universal files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
+      <Filter>Universal files</Filter>
+    </ClInclude>
+    <ClInclude Include="OrientationManager.h">
       <Filter>Universal files</Filter>
     </ClInclude>
   </ItemGroup>

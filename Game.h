@@ -3,7 +3,6 @@
 #include <vector>
 #include <memory>
 
-
 class Time;
 class GameOfLife;
 class Texture;
@@ -28,11 +27,15 @@ public:
 	void ProcessMouseMotionEvent( const SDL_MouseMotionEvent& e ) override;
 	void ProcessMouseDownEvent( const SDL_MouseButtonEvent& e ) override;
 	void ProcessMouseUpEvent( const SDL_MouseButtonEvent& e ) override;
+	void ProcessMouseWheelEvent(const SDL_MouseWheelEvent& e) override;
+	
 
+	
 private:
 	const Window m_Window;
 
 	Point2f m_LastMousePos;
+	Point2f m_PreviousMousePos;
 	std::unique_ptr<Time> m_Time;
 	std::unique_ptr<Time> m_AccumulatedTime;
 	std::unique_ptr<GameOfLife> m_GOL;
@@ -40,6 +43,21 @@ private:
 	int m_RenderedFrames;
 	std::unique_ptr<Texture> m_FPSCounter;
 	float m_TargetFPS;
+
+
+	// Camera testing:
+	bool m_CenterToGrid;
+	void PushCameraMatrix() const;
+	Rectf m_CameraPos;
+
+	bool m_AltHeld;
+	bool m_LeftClickHeld;
+	//
+
+	// 
+	//
+	// Make camera a separate class
+	//
 
 
 	// FUNCTIONS

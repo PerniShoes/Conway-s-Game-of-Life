@@ -176,6 +176,10 @@ void BaseGame::Run()
 				e.button.y = int(m_Window.height) - e.button.y;
 				this->ProcessMouseUpEvent(e.button);
 				break;
+			case SDL_MOUSEWHEEL:
+				e.button.y = int(m_Window.height) - e.button.y;
+				this->ProcessMouseWheelEvent(e.wheel);
+				break;
 			}
 		}
 

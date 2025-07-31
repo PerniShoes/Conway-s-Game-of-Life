@@ -134,12 +134,14 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameOfLife.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OrientationManager.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameOfLife.h" />
+    <ClInclude Include="OrientationManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Time.h" />
   </ItemGroup>

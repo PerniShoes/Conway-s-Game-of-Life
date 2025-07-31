@@ -46,6 +46,11 @@ public:
 	{
 		
 	}
+	virtual void ProcessMouseWheelEvent(const SDL_MouseWheelEvent& e)
+	{
+
+	}
+
 
 	const Rectf& GetViewPort() const
 	{
