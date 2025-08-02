@@ -31,7 +31,7 @@ void Game::Initialize()
 	m_TargetFPS = 60.0f;
 	m_Time = std::make_unique<Time>(0.0f);
 	m_AccumulatedTime = std::make_unique<Time>(0.0f);
-	m_GOL = std::make_unique<GameOfLife>(100);
+	m_GOL = std::make_unique<GameOfLife>(500);
 
 	OrientationManager::UpdateCamera(GetViewPort());
 	
